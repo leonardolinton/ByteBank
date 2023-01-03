@@ -1,0 +1,15 @@
+C:\SharpCoders\ByteBank\bin\Debug\net7.0\ByteBank.exe
+C:\SharpCoders\ByteBank\bin\Debug\net7.0\ByteBank.deps.json
+C:\SharpCoders\ByteBank\bin\Debug\net7.0\ByteBank.runtimeconfig.json
+C:\SharpCoders\ByteBank\bin\Debug\net7.0\ByteBank.dll
+C:\SharpCoders\ByteBank\bin\Debug\net7.0\ByteBank.pdb
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.csproj.AssemblyReference.cache
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.GeneratedMSBuildEditorConfig.editorconfig
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.AssemblyInfoInputs.cache
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.AssemblyInfo.cs
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.csproj.CoreCompileInputs.cache
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.dll
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\refint\ByteBank.dll
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.pdb
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ByteBank.genruntimeconfig.cache
+C:\SharpCoders\ByteBank\obj\Debug\net7.0\ref\ByteBank.dll
