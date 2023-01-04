@@ -1,12 +1,15 @@
-﻿
-bool menu = true;
-List<string> Clientes = new List<string>();
+﻿using ByteBank.Models;
 
-ShowMenu();
+bool menu = true;
+List<string> Nomes = new List<string>();
+List<string> Cpfs = new List<string>();
+List<double> Saldo = new List<double>();
+
+ExibirMenu();
 Console.WriteLine("PROGRAMA ENCERRADO!!!");
 
 /*========== FUNÇÃO EXIBIR MENU =========*/
-void ShowMenu()
+void ExibirMenu()
 {
     do
     {
@@ -23,31 +26,31 @@ void ShowMenu()
         Console.WriteLine("0 - PARA SAIR DO PROGRAMA");
         Console.WriteLine();
         Console.WriteLine("DIGITE A OPÇÃO DESEJADA");
-        string opcao = Console.ReadLine();
+        int opcao = int.Parse(Console.ReadLine());
 
         Console.Clear();
         switch (opcao)
         {
-            case "1":
-                Console.WriteLine("Adicionando Cliente!!!");
+            case 1:
                 AdicionarCliente();
                 break;
-            case "2":
+            case 2:
                 DeletarCliente();
                 break;
-            case "3":
+            case 3:
                 ListarClientes();
                 break;
-            case "4":
-                Console.WriteLine("Detalhar Cliente!!!");
+            case 4:
+                DetalhesCliente();
                 break;
-            case "5":
+            case 5:
                 Console.WriteLine("Quantidade Armazenada!!!");
+                ValorTotalBanco();
                 break;
-            case "6":
+            case 6:
                 Console.WriteLine("Manipular Conta!!!");
                 break;
-            case "0":
+            case 0:
                 EncerrarMenu();
                 break;
             default:
@@ -65,42 +68,53 @@ void ShowMenu()
 /*========== FUNÇÃO ENCERRAR MENU =========*/
 void EncerrarMenu()
 {
-    Console.WriteLine("Deseja sair [Y/N]?");
-    string sair = Console.ReadLine();
-    if (sair == "y" || sair == "Y")
+    Console.WriteLine("Deseja sair? [1 - Sim]  [2 - Não]");
+    int sair = int.Parse(Console.ReadLine());
+    if (sair == 1)
     {
         Console.WriteLine("Saindo do programa!!!");
         menu = false;
     }
-    else if (sair == "n" || sair == "N")
+    else if (sair == 2)
     {
-        Console.WriteLine("Retornando para o menu!!!");
+        Console.WriteLine("Retornando para o menu principal!!!");
     }
     else
     {
-        Console.WriteLine("Opção Invalida!!!");
+        Console.WriteLine("Opção inválida!!!");
     }
 }
 
 void AdicionarCliente()
 {
-    Console.WriteLine("Digite o nome do Cliente");
-    string addCliente = Console.ReadLine();
-    Clientes.Add(addCliente);
+    Console.WriteLine("Adicionando Cliente!!!");
+    Console.Write("Digite o nome: ");
+    string? nomeCliente = Console.ReadLine();
+    Nomes.Add(nomeCliente);
+
+    Console.Write("Digite o CPF: ");
+    string? cpfCliente = Console.ReadLine();
+    Cpfs.Add(cpfCliente);
+
+    Console.Write("Digite saldo: ");
+    double saldoCliente = double.Parse(Console.ReadLine());
+    Saldo.Add(saldoCliente);
+
     Console.WriteLine();
-    Console.WriteLine($"Cliente {addCliente}, foi adicionado com sucesso!!!");
+    Console.WriteLine($"Cliente {nomeCliente}, adicionado com sucesso!!!");
+
 }
 
 void DeletarCliente()
 {
-    Console.WriteLine("DELETAR CLIENTE!!!");
+    Console.WriteLine("Deletar cliente!!!");
+    Console.Write("Digite o CPF do cliente: ");
     string dellClient = Console.ReadLine();
-    //Clientes.Remove(dellClient);
     int? posicao = null;
 
-    for (int i = 0; i < Clientes.Count; i++)
+    for (int i = 0; i < Cpfs.Count; i++)
     {
-        if (Clientes[i] == dellClient)
+        if (Cpfs[i] == dellClient)
         {
             posicao = i;
         }
@@ -108,25 +122,64 @@ void DeletarCliente()
 
     if (posicao == null)
     {
-        Console.WriteLine($"Cliente {dellClient}, não existe!");
+        Console.WriteLine($"CPF {dellClient}, não existe!");
     }
     else
     {
-        Clientes.RemoveAt((int)posicao);
-        Console.WriteLine($"Cliente {dellClient}, deletado com sucesso!!!");
+        Console.WriteLine($"Cliente {Nomes[(int)posicao]} sendo excluido!");
+        Cpfs.RemoveAt((int)posicao);
+        Saldo.RemoveAt((int)posicao);
+        Nomes.RemoveAt((int)posicao);
+        Console.WriteLine($"Deletado com sucesso!!!");
     }
 }
 
 void ListarClientes()
 {
-    Console.WriteLine("LISTA DE CLIENTES");
+    Console.WriteLine("Lista de clientes");
     Console.WriteLine();
-    int i = 0;
-    foreach (string list in Clientes)
+
+    for (int i = 0; i < Nomes.Count; i++)
     {
-        Console.WriteLine($"{list}");
+        Console.WriteLine($"{i + 1} - CPF = {Cpfs[i]} | NOME = {Nomes[i]} | SALDO = {Saldo[i]:f2}");
     }
-    int totalClient = Clientes.Count;
+    int totalClient = Nomes.Count;
     Console.WriteLine();
-    Console.WriteLine($"TOTAL DE CLIENTES REGISTRADOS: {totalClient}");
+    Console.WriteLine($"Total de clientes: {totalClient}");
+}
+
+void DetalhesCliente()
+{
+    Console.WriteLine("Consultar cliente!!!");
+    Console.WriteLine("Digite o CPF do cliente");
+    string cpfCliente = Console.ReadLine();
+
+    int? posicao = null;
+
+    for (int i = 0; i < Cpfs.Count; i++)
+    {
+        if (Cpfs[i] == cpfCliente)
+        {
+            posicao = i;
+        }
+    }
+
+    Console.Clear();
+    if (posicao == null)
+    {
+        Console.WriteLine($"CPF {cpfCliente}, não existe!");
+    }
+    else
+    {
+        Console.WriteLine($"Detalhes do cliente!!!");
+        Console.WriteLine($"CPF: {Cpfs[(int)posicao]}");
+        Console.WriteLine($"Nome: {Nomes[(int)posicao]}");
+        Console.WriteLine($"Saldo: R$ {Saldo[(int)posicao]:f2}");
+    }
+}
+
+void ValorTotalBanco()
+{
+    double total = Saldo.Sum();
+    Console.WriteLine($"valor total em caixa: R$ {total:f2}");
 }
