@@ -21,20 +21,37 @@ namespace ByteBank.Models
 
             Console.Write("Digite o CPF: ");
             string? cpfCliente = Console.ReadLine();
-            cpfs.Add(cpfCliente);
+            bool cpfExistente = true;
 
-            Console.Write("Digite o nome: ");
-            string? nomeCliente = Console.ReadLine();
-            titulares.Add(nomeCliente);
+            for (int i = 0; i < cpfs.Count; i++)
+            {
+                if (cpfCliente == cpfs[i])
+                {
+                    cpfExistente = false;
+                }
+            }
 
-            Console.Write("Insira a senha: ");
-            string pwdCliente = Console.ReadLine();
-            senha.Add(pwdCliente);
+            if (cpfExistente == false)
+            {
+                Console.WriteLine("CPF Já cadastrado!!!");
+            }
+            else
+            {
+                cpfs.Add(cpfCliente);
 
-            conta.AdicionarConta();
+                Console.Write("Digite o nome: ");
+                string? nomeCliente = Console.ReadLine();
+                titulares.Add(nomeCliente);
 
-            Console.WriteLine();
-            Console.WriteLine($"Cliente {nomeCliente}, adicionado com sucesso!!!");
+                Console.Write("Insira a senha: ");
+                string pwdCliente = Console.ReadLine();
+                senha.Add(pwdCliente);
+
+                conta.AdicionarConta();
+
+                Console.WriteLine();
+                Console.WriteLine($"Cliente {nomeCliente}, adicionado com sucesso!!!");
+            }
         }
 
         public void DeletarCliente()
